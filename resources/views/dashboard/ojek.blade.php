@@ -27,6 +27,10 @@
                         <button class="btn btn-primary w-100" type="submit" name="submit">PESAN</button>
                     
                     </form>
+
+                    <div class="col-12 mt-3">
+                        <a href="{{route ('logout')}}" class="btn btn-primary col-lg-12 col-12 col-md-12 mt-3">logout</a>
+                    </div>
                 </div>
                 </div>
             </div>

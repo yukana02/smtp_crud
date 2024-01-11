@@ -19,10 +19,7 @@ class CvhaikalController extends Controller
     {
         return view ('dashboard.ojek');
     }
-    public function backdashboard(): View
-    {
-        return view ('dashboard.ojek');
-    }
+   
 
 
     public function hitungBiaya(Request $request)
