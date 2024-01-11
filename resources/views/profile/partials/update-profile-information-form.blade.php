@@ -13,10 +13,23 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-3 space-y-6">
         @csrf
         @method('patch')
 
+        <div class="col-12">
+            <label for="name" class="form-label">Nama</label>
+            <input type="text" name="name" class="form-control" id="name" value="{{old ('name',$user->name )}}" required autofocus autocomplete="name">
+            <div class="invalid-feedback">Please enter your Name</div>
+            <x-input-error :messages="$errors->updatePassword->get('name')" class="mt-2" />
+        </div>
+        <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" name="email" class="form-control" id="email" value="{{old('email',$user->email)}}" required autocomplete="username">
+            <div class="invalid-feedback">Please enter your password!</div>
+            <x-input-error :messages="$errors->updatePassword->get('email')" class="mt-2" />
+        </div>
+{{-- 
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
@@ -26,7 +39,7 @@
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <x-input-error class="mt-2" :messages="$errors->get('email')" /> --}}
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -48,7 +61,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button class="btn btn-primary mt-2 col-lg-3 col-sm-12 col-md-12" type="submit" name="submit">simpan</button>
 
             @if (session('status') === 'profile-updated')
                 <p
