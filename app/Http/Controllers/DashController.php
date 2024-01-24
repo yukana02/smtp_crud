@@ -15,7 +15,7 @@ class DashController extends Controller
     $no = 1;
     $data = DB::table('cruds')
         ->join('users', 'users.id', '=', 'cruds.iduser')
-        ->select('cruds.title') // atau jika Anda hanya membutuhkan beberapa kolom, Anda dapat menentukannya di sini
+        ->select('cruds.title','cruds.id') // atau jika Anda hanya membutuhkan beberapa kolom, Anda dapat menentukannya di sini
         ->latest('cruds.created_at') // urutkan dari yang terbaru
         ->paginate(10); // Menentukan jumlah item per halaman (misalnya, 10 item per halaman)
 

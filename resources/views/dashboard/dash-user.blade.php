@@ -5,7 +5,7 @@
 <div class="container" style="min-height: 550px;" >
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12 col-sm-12 card shadow">
-            <a href="{{route ('createdata')}}" class="btn btn-primary col-lg-3 col-12 col-md-6 mt-3">Tambah Data</a>
+            <a href="{{route ('buatpost')}}" class="btn btn-primary col-lg-3 col-12 col-md-6 mt-3">Tambah Data</a>
             <table class="table col-lg-12 col-md-12 col-sm-12" id="dataTable"><br>
                 <div class=" mb-3 input-group col-form-label">
                     <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -30,10 +30,10 @@
                           <td >{{ $data2->title }}</td>
                           <td class="text-center " style="text-align: center;">
                             <a href="" class="btn btn-sm btn-dark p-1 col-lg-5 col-md-12 col-12 mb-2">show</a>
-                            <a href="" class="btn btn-sm btn-primary p-1 col-lg-5 col-md-12 col-12">Edit</a>
+                            <a href="{{ route('edit',['id' => $data2->id ]) }}" class="btn btn-sm btn-primary p-1 col-lg-5 col-md-12 col-12 mb-2">Edit</a>
                               {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('posts.destroy', $data2->id) }}" method="POST">
                                   <a href="{{ route('posts.show', $data2->id) }}" class="btn btn-sm btn-dark">show</a>
-                                  <a href="{{ route('posts.edit', $data2->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                  <a href="{{ route('edit', $data2->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                   @csrf
                                   @method('DELETE')
                                   <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>

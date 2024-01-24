@@ -52,7 +52,7 @@
 @section('title','Login User')
 
 @section('content')
- <x-auth-session-status class="mb-4" :status="session('status')" />
+ {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
     
 <div class="container">
     <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -121,6 +121,15 @@
         });
     </script>
     @endif
-
+    @if(session('status'))
+    <script>
+        Swal.fire({
+            title: "Berhasil",
+            text: "{{ session('status') }}",
+            icon: "success"
+        });
+    </script>
+    @endif
+    
 
     @endsection

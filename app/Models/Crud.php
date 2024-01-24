@@ -14,6 +14,6 @@ class Crud extends Model
         'iduser',
         'title',
         'content',
-        'images',
+        'image',
     ];
 }

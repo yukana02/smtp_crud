@@ -6,6 +6,8 @@ use App\Models\Crud;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class Crudcontroller extends Controller
 {
@@ -28,7 +30,7 @@ class Crudcontroller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
@@ -40,41 +42,24 @@ class Crudcontroller extends Controller
         $title      = $request->input('title');
         $content    = $request->input('content');
         $images     = $request->file('images');
-
         $imagesAs   = $images->hashName();
-        
     
-        // Lakukan operasi lain yang dibutuhkan (validasi, penyimpanan gambar, dll.)
         $iduser = Auth::id();
 
         //simpan image di directoriy
-        $imagePath  = $this->uploadImages($images);
+        $path = $images->storeAs('public/images',$images->hashName());
     
         // Simpan data ke dalam database
         $proses = Crud::create([
             'iduser'    => $iduser,
             'title'     => $title,
             'content'   => $content, 
-            'images'    => $imagesAs,
+            'image'     => $imagesAs,
         ]);
     
         return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Disimpan!']);
     }
-    private function uploadImages($images)
-    {
-        //jika hanya satu image tidak perlu menggunakn perlulangan
-        $path = $images->storeAs('public/images', $images->hashName());
-        return $path;
-        
-        // jika lebis dari satu images menggunakan array
-        // $imagePaths = [];
-        // foreach ($imagesAs as $image) {
-        //     // Lakukan proses pengunggahan dan dapatkan path gambar
-        //     $path = $image->storeAs('public/images',$image->hashName());
-        //     $imagePaths[] = $path;
-        // }
-        // return $imagePaths;
-    }
+  
     
     
 
@@ -83,27 +68,57 @@ class Crudcontroller extends Controller
      */
     public function show($id)
 {
-    $data = Crud::all();
-    $content = json_decode($data->content, true);
-
-    return view('dashboard.dash-user', compact('content'));
+ 
 }
 
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $data = Crud::find($id);
+        return view('dashboard.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'images' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate only if a new image is uploaded
+        ]);
+
+        $db = Crud::find($id);
+        // IF USER UPLOAD NEW IMAGE
+        if($request->hasFile('images')){
+            $title      = $request->input('title');
+            $content    = $request->input('content');
+            $images     = $request->file('images');
+            $imagesAs   = $images->hashName();
+            //save new images
+            $path = $images->storeAs('public/images',$images->hashName());
+            //delete old images
+            if ($db->image) {
+                Storage::delete('public/images/' . $db->image);
+            }
+            //update on database
+            $db->update([
+                'title'     => $title,
+                'content'   => $content,
+                'image'     => $imagesAs,
+            ]);
+        }else{
+            //user keep using old images
+            $db->update([
+                'title'     =>$request->input('title'),
+                'content'   =>$request->input('content'),
+            ]);
+        }
+        return redirect()->route('edit', ['id' => $db->id])->with('success', 'Data updated successfully');
     }
 
     /**

@@ -28,9 +28,12 @@ Route::get('/', function () {
 Route::middleware('auth','verified')->group(function () {
     
     // Route::get('/dashboard', function () { return view('dashboard.dash-user');})->middleware(['auth', 'verified'])->name('dashboard');
-    Route::get('/dashboard', [CvhaikalController::class, 'index'])->name('dashboard');
-    Route::post('/Pesan', [CvhaikalController::class, 'hitungBiaya'])->name('hitung');
-    Route::get('/back', [CvhaikalController::class, 'backdashboard'])->name('back');
+    Route::get('/dashboard', [DashController::class, 'index'])->name('dashboard');
+    Route::get('/Buat_Post', [CrudController::class, 'index'])->name('buatpost');
+    Route::post('/insertdata', [CrudController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [CrudController::class, 'edit'])->name('edit');
+    Route::patch('/proses/{id}', [CrudController::class, 'update'])->name('prosesedit');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
