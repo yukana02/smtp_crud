@@ -33,6 +33,7 @@ Route::middleware('auth','verified')->group(function () {
     Route::post('/insertdata', [CrudController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [CrudController::class, 'edit'])->name('edit');
     Route::patch('/proses/{id}', [CrudController::class, 'update'])->name('prosesedit');
+    Route::delete('/delete/{id}', [CrudController::class, 'destroy'])->name('delete');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

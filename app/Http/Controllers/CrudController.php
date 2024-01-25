@@ -126,6 +126,16 @@ class Crudcontroller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         //get post by ID
+         $db = Crud::findOrFail($id);
+
+         //delete image
+         Storage::delete('public/images/'. $db->image);
+ 
+         //delete post
+         $db->delete();
+ 
+         //redirect to index
+         return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

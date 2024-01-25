@@ -31,13 +31,11 @@
                           <td class="text-center " style="text-align: center;">
                             <a href="" class="btn btn-sm btn-dark p-1 col-lg-5 col-md-12 col-12 mb-2">show</a>
                             <a href="{{ route('edit',['id' => $data2->id ]) }}" class="btn btn-sm btn-primary p-1 col-lg-5 col-md-12 col-12 mb-2">Edit</a>
-                              {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('posts.destroy', $data2->id) }}" method="POST">
-                                  <a href="{{ route('posts.show', $data2->id) }}" class="btn btn-sm btn-dark">show</a>
-                                  <a href="{{ route('edit', $data2->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                              <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('delete',['id' => $data2->id]) }}" method="POST">
                                   @csrf
                                   @method('DELETE')
-                                  <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                              </form> --}}
+                                  <button type="submit" class="btn btn-sm btn-danger col-12 col-md-12 col-lg-10">HAPUS</button>
+                              </form>
                           </td>
                       </tr>
                     @empty
