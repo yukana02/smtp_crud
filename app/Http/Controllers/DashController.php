@@ -9,35 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class DashController extends Controller
 {
-
-    public function index(): View
+    
+    public function index(Request $request): View
     {
-    $no = 1;
-    $data = DB::table('cruds')
-        ->join('users', 'users.id', '=', 'cruds.iduser')
-        ->select('cruds.title','cruds.id') // atau jika Anda hanya membutuhkan beberapa kolom, Anda dapat menentukannya di sini
-        ->latest('cruds.created_at') // urutkan dari yang terbaru
-        ->paginate(10); // Menentukan jumlah item per halaman (misalnya, 10 item per halaman)
-
-    return view('dashboard.dash-user', compact('data','no'));
+        $query = DB::table('cruds')
+            ->join('users', 'users.id', '=', 'cruds.iduser')
+            ->select('cruds.title','cruds.id')
+            ->latest('cruds.created_at');
+    
+        $data = $request->has('cari') ? $query->where('title', 'like', '%' . $request->input('cari') . '%')->paginate(10) : $query->paginate(10);
+    
+        return view('dashboard.dash-user', compact('data'));
     }
-
-    public function cari(Request $request)
-{
-    $cari = $request->input('cari');
-
-    $data = Crud::latest();
-
-    if ($cari) {
-        $data = $data->where('title', 'like', '%' . $cari . '%')->paginate(10);
-    } else {
-        // Jika pencarian kosong, tampilkan semua data
-        $data = $data->paginate(10);
-    }
-
-    return view('dashboard.dash-user', compact('data', 'cari'));
-}
-
-
+    
 
 }
+    

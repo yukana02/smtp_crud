@@ -23,6 +23,7 @@
  <link href="{{asset('vendor/remixicon/remixicon.css' ) }}" rel="stylesheet">
  <link href="{{asset('vendor/simple-datatables/style.css' ) }}" rel="stylesheet">
  <link href="{{asset('css/style.css' ) }}" rel="stylesheet">
+ <link href="{{asset('css/mystyle.css' ) }}" rel="stylesheet">
  {{-- <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
@@ -88,7 +89,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="row">
-            <div class="col-xxl-4 col-xl-12">
+                         
               @yield('content')
             </div>  
           </div>
@@ -97,7 +98,10 @@
     </section>
 
   </main><!-- End #main -->
-
+  {{-- <div class="col-xxl-4 col-xl-12  align-items-center justify-content-center">
+    <div class="chat-icon">
+      <a href="{{ route('buatpost') }}">Post</a>
+    </div>  --}}
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer card d-flex" style="bottom: 0px; margin-bottom:0;">
     <div class="copyright">

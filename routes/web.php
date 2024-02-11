@@ -29,6 +29,7 @@ Route::middleware('auth','verified')->group(function () {
     
     // Route::get('/dashboard', function () { return view('dashboard.dash-user');})->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/dashboard', [DashController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/cari', [DashController::class, 'index'])->name('cari');
     Route::get('/Buat_Post', [CrudController::class, 'index'])->name('buatpost');
     Route::post('/insertdata', [CrudController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [CrudController::class, 'edit'])->name('edit');

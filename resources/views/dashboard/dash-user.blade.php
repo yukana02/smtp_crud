@@ -7,12 +7,15 @@
         <div class="col-12 col-md-12 col-lg-12 col-sm-12 card shadow">
             <a href="{{route ('buatpost')}}" class="btn btn-primary col-lg-3 col-12 col-md-6 mt-3">Tambah Data</a>
             <table class="table col-lg-12 col-md-12 col-sm-12" id="dataTable"><br>
-                <div class=" mb-3 input-group col-form-label">
-                    <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        {{-- <a href="{{route ('cari')}}" class="btn btn-primary ">Cari Judul</a> --}}
+                <form action="{{ route('cari') }}" method="GET">
+                    <div class=" mb-3 input-group col-form-label">
+                        <input type="text" name="cari" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Cari Judul</button>
+                             {{-- <a href="{{ route ('cari') }}" class="btn btn-primary ">Cari Judul</a> --}}
+                        </div>
                     </div>
-                </div>
+                </form>
                 <thead>
                     <tr class="text-center">
                         <th class="col-2">No</th>
@@ -21,6 +24,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $no = 1;
+                    @endphp
                     @forelse ($data as $data2)
                       <tr>
                             <td class="text-center">{{$no++}}</td>

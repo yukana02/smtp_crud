@@ -1,0 +1,17 @@
+.chat-icon {
+    position: fixed;
+    bottom: 100px; /* Sesuaikan dengan jarak dari bawah layar */
+    right: 50px; /* Sesuaikan dengan jarak dari kanan layar */
+    background-color: #007bff; /* Warna latar belakang ikon */
+    color: #fff; /* Warna teks ikon */
+    padding: 10px 20px; /* Sesuaikan ukuran ikon */
+    border-radius: 50%; /* Membuat ikon menjadi lingkaran */
+    text-decoration: none; /* Menghilangkan garis bawah pada teks */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Efek bayangan untuk tampilan */
+    
+  }
+  
+  .chat-icon:hover {
+    background-color: #1a60aa; /* Warna latar belakang saat hover */
+  }
+  
