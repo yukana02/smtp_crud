@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Crud;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View ;
 
 class Crudcontroller extends Controller
 {
@@ -16,7 +16,7 @@ class Crudcontroller extends Controller
      */
     public function index(): View
     {
-        return view ('dashboard.create');
+        return View ('dashboard.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class Crudcontroller extends Controller
             'image'     => $imagesAs,
         ]);
     
-        return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Disimpan!']);
+        return Redirect()->route('dashboard')->with(['success' => 'Data Berhasil Disimpan!']);
     }
   
     
@@ -77,6 +77,7 @@ class Crudcontroller extends Controller
      */
     public function edit(string $id): View
     {
+       
         $data = Crud::find($id);
         return view('dashboard.edit', compact('data'));
     }
